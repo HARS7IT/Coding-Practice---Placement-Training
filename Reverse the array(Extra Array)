@@ -1,0 +1,8 @@
+def reverse_an_array(a):
+  n = len(a)
+  a_new = []
+  for i in range(n):
+    a_new.append(a[n-i-1])
+  return a_new
+
+print(reverse_an_array([1,2,3,4]))

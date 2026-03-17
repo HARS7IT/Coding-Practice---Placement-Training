@@ -1,0 +1,23 @@
+from typing import List
+
+
+class Solution:
+    def sentences(self, list : List[List[str]]) -> List[List[str]]:
+        # code class Solution:
+    
+
+        result = []
+        
+        def backtrack(index, path):
+            if index == len(list):
+                result.append(" ".join(path))
+                return
+            
+            for word in list[index]:
+                path.append(word)
+                backtrack(index + 1, path)
+                path.pop()
+        
+        backtrack(0, [])
+        
+        return result

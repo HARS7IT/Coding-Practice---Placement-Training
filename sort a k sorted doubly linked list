@@ -1,0 +1,40 @@
+import heapq
+
+class Solution:
+    def sortAKSortedDLL(self, head, k):
+        if not head:
+            return head
+        
+        heap = []
+        new_head = None
+        last = None
+        
+        # Step 1: Push first k+1 elements into heap
+        curr = head
+        for _ in range(k + 1):
+            if curr:
+                heapq.heappush(heap, (curr.data, curr))
+                curr = curr.next
+        
+        # Step 2: Process remaining nodes
+        while heap:
+            value, node = heapq.heappop(heap)
+            
+            # First node becomes new head
+            if not new_head:
+                new_head = node
+                new_head.prev = None
+                last = new_head
+            else:
+                last.next = node
+                node.prev = last
+                last = node
+            
+            # Push next node into heap
+            if curr:
+                heapq.heappush(heap, (curr.data, curr))
+                curr = curr.next
+        
+        last.next = None
+        
+        return new_head

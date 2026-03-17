@@ -1,0 +1,37 @@
+def is_valid_shuffle(s1, s2, result):
+    n, m = len(s1), len(s2)
+
+    # Length must match
+    if n + m != len(result):
+        return False
+
+    # Create DP table
+    dp = [[False] * (m + 1) for _ in range(n + 1)]
+    dp[0][0] = True
+
+    # Fill first column
+    for i in range(1, n + 1):
+        dp[i][0] = dp[i-1][0] and s1[i-1] == result[i-1]
+
+    # Fill first row
+    for j in range(1, m + 1):
+        dp[0][j] = dp[0][j-1] and s2[j-1] == result[j-1]
+
+    # Fill rest of table
+    for i in range(1, n + 1):
+        for j in range(1, m + 1):
+            dp[i][j] = (dp[i-1][j] and s1[i-1] == result[i+j-1]) or \
+                       (dp[i][j-1] and s2[j-1] == result[i+j-1])
+
+    return dp[n][m]
+
+
+# Example usage
+print(is_valid_shuffle("abc", "def", "adbcef"))  # True
+print(is_valid_shuffle("abc", "def", "abdecf"))  # False
+
+
+
+# Example
+print(is_valid_shuffle("abc", "def", "adbcef"))  # True
+print(is_valid_shuffle("abc", "def", "abdecf"))  # False

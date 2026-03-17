@@ -1,0 +1,16 @@
+def print_subsequences(s, current="", index=0):
+    
+    # Base case
+    if index == len(s):
+        print(f'"{current}"')
+        return
+    
+    # Include current character
+    print_subsequences(s, current + s[index], index + 1)
+    
+    # Exclude current character
+    print_subsequences(s, current, index + 1)
+
+
+# Example
+print_subsequences("abc")

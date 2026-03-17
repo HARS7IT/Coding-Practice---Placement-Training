@@ -1,0 +1,29 @@
+def quicksort_3way(arr, low, high):
+    if low >= high:
+        return
+    
+    pivot = arr[low]
+    
+    lt = low       # arr[low..lt-1] < pivot
+    gt = high      # arr[gt+1..high] > pivot
+    i = low        # arr[lt..i-1] == pivot
+    
+    while i <= gt:
+        if arr[i] < pivot:
+            arr[lt], arr[i] = arr[i], arr[lt]
+            lt += 1
+            i += 1
+        elif arr[i] > pivot:
+            arr[i], arr[gt] = arr[gt], arr[i]
+            gt -= 1
+        else:
+            i += 1
+    
+    quicksort_3way(arr, low, lt - 1)
+    quicksort_3way(arr, gt + 1, high)
+
+
+# Example
+arr = [4, 5, 4, 3, 4, 2, 5, 4, 1]
+quicksort_3way(arr, 0, len(arr) - 1)
+print(arr)

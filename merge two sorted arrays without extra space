@@ -1,0 +1,23 @@
+arr1 = [1, 3, 5, 7]
+arr2 = [0, 2, 6, 8, 9]
+n = len(arr1)
+m = len(arr2)
+i = 0
+j = 0
+k = n-1
+
+while(i<=k and j<m):
+    if arr1[i] < arr2[j]:
+        i += 1
+    else:
+        temp = arr2[j]
+        arr2[j] = arr1[k]
+        arr1[k] = temp
+        j += 1
+        k -= 1
+print(arr1.sort())
+print(arr2.sort())
+
+
+
+

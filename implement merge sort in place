@@ -1,0 +1,29 @@
+class Solution:
+    def mergeSort(self, arr, l, r):
+        if l >= r:
+            return
+        
+        mid = (l + r) // 2
+        
+        # Recursive calls
+        self.mergeSort(arr, l, mid)
+        self.mergeSort(arr, mid + 1, r)
+        
+        # -------- In-place merge using Gap Method --------
+        total = r - l + 1
+        gap = (total // 2) + (total % 2)
+        
+        while gap > 0:
+            i = l
+            j = l + gap
+            
+            while j <= r:
+                if arr[i] > arr[j]:
+                    arr[i], arr[j] = arr[j], arr[i]
+                i += 1
+                j += 1
+            
+            if gap == 1:
+                gap = 0
+            else:
+                gap = (gap // 2) + (gap % 2)

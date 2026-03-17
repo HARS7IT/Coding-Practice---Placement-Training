@@ -1,0 +1,29 @@
+class Solution:
+    def reverseByN(self, head, k):
+        
+        if not head:
+            return None
+        
+        curr = head
+        new_head = None
+        count = 0
+        
+        # Reverse first k nodes
+        while curr and count < k:
+            
+            next_node = curr.next
+            
+            # Swap next and prev
+            curr.next = curr.prev
+            curr.prev = next_node
+            
+            new_head = curr
+            curr = next_node
+            count += 1
+        
+        # Recursively reverse remaining list
+        if curr:
+            head.next = self.reverseByN(curr, k)
+            head.next.prev = head
+        
+        return new_head

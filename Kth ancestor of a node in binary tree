@@ -1,0 +1,27 @@
+class Solution:
+    def kthAncestor(self, root, k, node):
+        
+        self.ans = -1
+        
+        def dfs(curr):
+            if not curr:
+                return -1
+            
+            if curr.data == node:
+                return 0
+            
+            left = dfs(curr.left)
+            right = dfs(curr.right)
+            
+            if left == -1 and right == -1:
+                return -1
+            
+            dist = max(left, right) + 1
+            
+            if dist == k:
+                self.ans = curr.data
+            
+            return dist
+        
+        dfs(root)
+        return self.ans

@@ -1,0 +1,31 @@
+import bisect
+
+class Solution:
+    def jobScheduling(self, startTime, endTime, profit):
+        # Combine and sort jobs by start time
+        jobs = sorted(zip(startTime, endTime, profit))
+        n = len(jobs)
+        
+        # Extract start times separately for binary search
+        starts = [job[0] for job in jobs]
+        
+        dp = [-1] * n
+        
+        def solve(i):
+            if i >= n:
+                return 0
+            
+            if dp[i] != -1:
+                return dp[i]
+            
+            # Option 1: Skip current job
+            skip = solve(i + 1)
+            
+            # Option 2: Take current job
+            next_index = bisect.bisect_left(starts, jobs[i][1])
+            take = jobs[i][2] + solve(next_index)
+            
+            dp[i] = max(skip, take)
+            return dp[i]
+        
+        return solve(0)

@@ -1,0 +1,31 @@
+def elementsMoreThanNbyK(arr, k):
+    n = len(arr)
+    if k < 2:
+        return []
+    
+    # Step 1: Find potential candidates
+    candidates = {}
+    
+    for num in arr:
+        if num in candidates:
+            candidates[num] += 1
+        elif len(candidates) < k - 1:
+            candidates[num] = 1
+        else:
+            # decrease count of all candidates
+            keys_to_remove = []
+            for key in candidates:
+                candidates[key] -= 1
+                if candidates[key] == 0:
+                    keys_to_remove.append(key)
+            
+            for key in keys_to_remove:
+                del candidates[key]
+    
+    # Step 2: Verify actual counts
+    result = []
+    for key in candidates:
+        if arr.count(key) > n // k:
+            result.append(key)
+    
+    return result

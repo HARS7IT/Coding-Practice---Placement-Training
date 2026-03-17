@@ -1,0 +1,27 @@
+class Solution:
+    def printKSumPaths(self, root, k):
+        
+        path = []
+        
+        def dfs(node):
+            if not node:
+                return
+            
+            # Add current node to path
+            path.append(node.data)
+            
+            # Check all subpaths ending at current node
+            current_sum = 0
+            for i in range(len(path) - 1, -1, -1):
+                current_sum += path[i]
+                if current_sum == k:
+                    print(*path[i:])
+            
+            # Recur left and right
+            dfs(node.left)
+            dfs(node.right)
+            
+            # Backtrack
+            path.pop()
+        
+        dfs(root)

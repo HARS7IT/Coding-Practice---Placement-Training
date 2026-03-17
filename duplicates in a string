@@ -1,0 +1,17 @@
+def print_duplicates(s):
+    freq = {}
+
+    # Count frequency of each character
+    for ch in s:
+        freq[ch] = freq.get(ch, 0) + 1
+
+    # Print duplicates in order of first occurrence
+    for ch in s:
+        if freq[ch] > 1:
+            print([ch, freq[ch]], end=" ")
+            freq[ch] = 0  # Avoid printing again
+
+
+# Example usage
+s = "geeksforgeeks"
+print_duplicates(s)

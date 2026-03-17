@@ -1,0 +1,12 @@
+def find_minn_maxx(a):
+  minn, maxx = a[0], a[0]
+  for num in a[1:]:
+    if num < minn:
+      minn = num
+    elif num > maxx:
+      maxx = num
+  return minn, maxx
+
+a=[1,2,3,4]
+minn, maxx = find_minn_maxx(a)
+print(minn, maxx)

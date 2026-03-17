@@ -1,0 +1,31 @@
+class Solution:
+    def isTree(self, V, adj):
+        
+        # Condition 1: Tree must have exactly V-1 edges
+        edge_count = sum(len(adj[i]) for i in range(V)) // 2
+        if edge_count != V - 1:
+            return False
+        
+        visited = [False] * V
+        
+        def dfs(node, parent):
+            visited[node] = True
+            
+            for neighbor in adj[node]:
+                if not visited[neighbor]:
+                    if not dfs(neighbor, node):
+                        return False
+                elif neighbor != parent:
+                    # Found cycle
+                    return False
+            return True
+        
+        # Start DFS from node 0
+        if not dfs(0, -1):
+            return False
+        
+        # Check if graph is connected
+        if not all(visited):
+            return False
+        
+        return True
