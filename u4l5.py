@@ -1,0 +1,15 @@
+set_a={1,2,3,4}
+set_b={3,4,5,6}
+
+print("Union: ",set_a | set_b)        
+
+print("Intersection: ",set_a & set_b) 
+
+print("Difference is: ",set_a - set_b)
+
+
+#checking meembership
+
+colors={"red","green","yellow"}
+print("Is red in color?: ","red" in colors)
+print("Is yellow in color?: ","yellow"in colors)
