@@ -1,0 +1,5 @@
+price1, price2, price3=input("Enter Price=").split()
+price1=float(price1)
+price2=float(price2)
+price3=float(price3)
+print("total price=",price1+price2+price3)
